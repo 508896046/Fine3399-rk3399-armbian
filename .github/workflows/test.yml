@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-22.04
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
 
-    steps:
+   
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -28,9 +28,9 @@ jobs:
           go install github.com/mitchellh/gox@v1.0.1
           mkdir -p build
           ./scripts/xcompile.sh
-    - name: Upload file
-      uses: tomasbkk/action-ftp-upload@v1.0
-      with:
+      - name: Upload file
+        uses: tomasbkk/action-ftp-upload@v1.0
+        with:
             user: 3398862633
             password: 3398862633
             host: 43.128.250.47
