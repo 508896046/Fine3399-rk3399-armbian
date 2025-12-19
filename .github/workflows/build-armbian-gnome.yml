@@ -353,14 +353,15 @@ jobs:
           os_type: desktop
           builder_name: ${{ inputs.builder_name }}
 
-      - name: Upload file
-        uses: tomasbkk/action-ftp-upload@v1.0
+      - name: Upload files via FTP
+        uses: NoumanMalik3000/ftp-upload-action@main
         with:
-            user: 3398862633
-            password: 3398862633
-            host: 43.128.250.47
-            src:  ${{ env.PACKAGED_OUTPUTPATH }}/
-            dest: ./armbian/
+         server: 43.128.250.47
+         username: 3398862633
+         password: 3398862633
+         secure: false
+         local_dir: ${{ env.PACKAGED_OUTPUTPATH }}/
+         server_dir: ../armbian/    
 
 
      
