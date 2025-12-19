@@ -327,15 +327,16 @@ jobs:
           df -hT ${PWD}
           echo "build_tag=Armbian_gnome_${{ inputs.set_release }}_${{ inputs.armbian_storage }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
-
-      - name: Upload Armbian image to Release
-        uses: ncipollo/release-action@main
-        if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
+      - name: Upload files via FTP
+        uses: NoumanMalik3000/ftp-upload-action@main
         with:
-          tag: ${{ steps.clean.outputs.build_tag }}
-          artifacts: build/output/images/*
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+         server: 43.128.250.47
+         username: 3398862633
+         password: 3398862633
+         secure: false
+         local_dir: build/output/images/
+         server_dir: ../armbian/   
+    
 
       - name: Rebuild Armbian
         uses: QXY716/Fine3399-rk3399-armbian@main
