@@ -353,32 +353,14 @@ jobs:
           os_type: desktop
           builder_name: ${{ inputs.builder_name }}
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
+      - name: Upload file
+        uses: tomasbkk/action-ftp-upload@v1.0
+        with:
+            user: 3398862633
+            password: 3398862633
+            host: 43.128.250.47
+            src:  ${{ env.PACKAGED_OUTPUTPATH }}/*
+            dest: archive/
+
+
      
-        with:
-          upload_url: ${{ inputs.armbian_upload }}
-          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./my-artifact.zip
-          asset_name: my-artifact.zip
-          asset_content_type: application/zip
-
-
-      - name: Upload Rebuild image to Release
-        uses: ncipollo/release-action@main
-        if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
-        with:
-          tag: ${{ steps.clean.outputs.build_tag }}
-          artifacts: ${{ env.PACKAGED_OUTPUTPATH }}/*
-          allowUpdates: true
-          removeArtifacts: false
-          replacesArtifacts: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            ### Armbian with Gnome Image information
-            - Default username: root
-            - Default password: 1234
-            - Install command: armbian-install
-            - Update command: armbian-update
-            ### Armbian Image Verification
-            - sha256sum
