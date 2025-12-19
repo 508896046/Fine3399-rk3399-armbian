@@ -238,14 +238,14 @@ jobs:
 
     steps:
        
-       - name: Setup Debug Session
-         uses: csexton/debugger-action@master
+       
 
-
-    
       - name: Checkout
         uses: actions/checkout@v4
-
+        
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
+         
       - name: Initialization environment
         id: init
         env:
