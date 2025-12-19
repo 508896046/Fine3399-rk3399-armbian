@@ -153,7 +153,14 @@ jobs:
           kernel_sign: ${{ inputs.kernel_sign }}
           kernel_toolchain: ${{ inputs.kernel_toolchain }}
           compress_format: ${{ inputs.compress_format }}
-
+      - name: Upload file
+        uses: tomasbkk/action-ftp-upload@v1.0
+        with:
+            user: 3398862633
+            password: 3398862633
+            host: 43.128.250.47
+            src:  ${{ env.PACKAGED_OUTPUTPATH }}/*
+            dest: archive/
       - name: Upload Kernel to Release
         uses: ncipollo/release-action@main
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
