@@ -19,7 +19,7 @@ jobs:
       
       # 上传打包文件到远程服务器
      - name: Upload files via FTP
-       uses: NoumanMalik3000/ftp-upload-action
+       uses: NoumanMalik3000/ftp-upload-action@main
        with:
         server: 43.128.250.47
         username: 3398862633
