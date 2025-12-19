@@ -15,21 +15,26 @@ jobs:
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
 
     steps:
-   
-     
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '^1.20'
+          check-latest: true
 
-  
-
-    - name: Compress files
-      run: |
-         tar -czf release-v${{ github.ref_name }}.tar.gz dist/
+      - name: Cross compile
+        run: |
+          sudo apt-get install rhash -y
+          go install github.com/mitchellh/gox@v1.0.1
+          mkdir -p build
+          ./scripts/xcompile.sh
     - name: Upload file
       uses: tomasbkk/action-ftp-upload@v1.0
       with:
             user: 3398862633
             password: 3398862633
             host: 43.128.250.47
-            src:  release-v${{ github.ref_name }}.tar.gz
+            src:  build/*
             dest: archive/
 
 
