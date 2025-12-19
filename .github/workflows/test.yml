@@ -1,0 +1,36 @@
+#==========================================================================
+# Description: Build Armbian
+# Copyright (C) 2021 https://github.com/ophub/amlogic-s9xxx-armbian
+#==========================================================================
+
+name: Build armbian-gnome
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+   
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+
+    steps:
+       
+       
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+     
+
+      - name: Upload file
+        uses: tomasbkk/action-ftp-upload@v1.0
+        with:
+            user: 3398862633
+            password: 3398862633
+            host: 43.128.250.47
+            src:  ${{ env.PACKAGED_OUTPUTPATH }}/*
+            dest: archive/
+
+
+     
