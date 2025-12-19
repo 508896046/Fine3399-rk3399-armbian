@@ -220,7 +220,7 @@ on:
       armbian_upload:
         description: "Select image storage type."
         required: false
-        default: ""
+        default: "http"
         type: input
        
       builder_name:
