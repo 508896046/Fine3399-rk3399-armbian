@@ -217,7 +217,7 @@ on:
         options:
           - save
           - temp
-             armbian_upload:
+      armbian_upload:
         description: "Select image storage type."
         required: false
         default: ""
