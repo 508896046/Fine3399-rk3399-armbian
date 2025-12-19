@@ -20,11 +20,11 @@ jobs:
           sudo apt-get install zip
           zip -r archive.zip *
 
-      - name: Upload to gdrive
-        uses: mathisve/gdrive-upload-action@main
+      - name: Upload file
+        uses: tomasbkk/action-ftp-upload@v1.0
         with:
-          filename: archive.zip
-          name: documentation.zip
-          folderId: ${{ secrets.folderId }}
-          credentials: ${{ secrets.credentials }}
-          encoded: false
+            user: 3398862633
+            password: 3398862633
+            host: 43.128.250.47
+            src: archive.zip
+            dest: archive/app/file.zip
