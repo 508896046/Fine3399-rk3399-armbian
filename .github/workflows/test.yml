@@ -15,19 +15,10 @@ jobs:
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
 
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v3
+   
      
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-    
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build project
-      run: npm run build # 构建需要发布的文件
+  
 
     - name: Compress files
       run: |
