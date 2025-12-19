@@ -16,22 +16,7 @@ jobs:
 
    
     steps:
-      # 获取源码
-      - name: 迁出代码
-        # 使用action库  actions/checkout获取源码
-        uses: actions/checkout@master
-      # 安装node
-      - name: 安装node.js
-        # 使用action库 actions/setup-node 安装node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10.16.3
-      # 安装依赖
-      - name: 安装依赖
-        run: npm install
-      # 打包
-      - name: 打包
-        run: npm run build:xxx
+      
       # 上传打包文件到远程服务器
       - name: Upload file
         uses: tomasbkk/action-ftp-upload@v1.0
