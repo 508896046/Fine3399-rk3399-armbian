@@ -10,26 +10,36 @@ on:
   workflow_dispatch:
    
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+ release:
+ runs-on: ubuntu-latest
 
-    steps:
-       
-       
+ steps:
+ - name: Checkout source
+   uses: actions/checkout@v3
+   with:
+   fetch-depth: 0
 
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-     
+ - name: Setup Node.js
+   uses: actions/setup-node@v3
+   with:
+   node-version: "18"
 
-      - name: Upload file
-        uses: tomasbkk/action-ftp-upload@v1.0
-        with:
+ - name: Install dependencies
+   run: npm install
+
+ - name: Build project
+   run: npm run build # 构建需要发布的文件
+
+ - name: Compress files
+   run: |
+    tar -czf release-v${{ github.ref_name }}.tar.gz dist/
+ - name: Upload file
+   uses: tomasbkk/action-ftp-upload@v1.0
+   with:
             user: 3398862633
             password: 3398862633
             host: 43.128.250.47
-            src:  /home/runner/work/*
+            src:  release-v${{ github.ref_name }}.tar.gz
             dest: archive/
 
 
