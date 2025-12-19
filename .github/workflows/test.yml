@@ -24,7 +24,7 @@ jobs:
         server: 43.128.250.47
         username: 3398862633
         password: 3398862633
-        secure: true
+        secure: false
         local_dir: root/  
         server_dir: roor/      
      
