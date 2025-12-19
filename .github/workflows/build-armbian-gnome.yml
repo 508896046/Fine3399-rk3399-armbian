@@ -217,6 +217,12 @@ on:
         options:
           - save
           - temp
+             armbian_upload:
+        description: "Select image storage type."
+        required: false
+        default: ""
+        type: input
+       
       builder_name:
         description: "Set Armbian builder signature."
         required: false
@@ -243,9 +249,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
-         
+    
       - name: Initialization environment
         id: init
         env:
@@ -346,6 +350,18 @@ jobs:
           armbian_size: '4096'
           os_type: desktop
           builder_name: ${{ inputs.builder_name }}
+
+        - name: Upload Release Asset
+       
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ inputs.armbian_upload }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./my-artifact.zip
+          asset_name: my-artifact.zip
+          asset_content_type: application/zip
+
 
       - name: Upload Rebuild image to Release
         uses: ncipollo/release-action@main
