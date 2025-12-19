@@ -18,16 +18,14 @@ jobs:
     steps:
       
       # 上传打包文件到远程服务器
-      - name: Install, build, and upload your site output
-        uses: radenpioneer/astro-ftp-deploy@v0.1.0
-        with:
-          server: 43.128.250.47
-          username: 3398862633
-          password: 3398862633
-          directory: public_html/
-          # protocol: ftp # The protocol to use on your FTP server. (optional)
-          # port: "21" # The port of your FTP server. (optional)
-          path: ${{ env.PACKAGED_OUTPUTPATH }}/*
-
+     - name: Upload files via FTP
+       uses: NoumanMalik3000/ftp-upload-action@v1
+       with:
+        server: 43.128.250.47
+        username: 3398862633
+        password: 3398862633
+        local_dir: root/  
+        server_dir: roor/      
+     
 
      
