@@ -249,8 +249,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: SSH connection to Actions
-        uses: P3TERX/debugger-action@master
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
     
       - name: Initialization environment
         id: init
