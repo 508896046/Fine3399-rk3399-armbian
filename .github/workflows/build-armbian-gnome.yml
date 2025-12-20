@@ -331,7 +331,7 @@ jobs:
  
 
       - name: Rebuild Armbian
-        uses: QXY716/Fine3399-rk3399-armbian@main
+        uses: 508896046/Fine3399-rk3399-armbian@main
         if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
         with:
           build_target: armbian
@@ -342,7 +342,7 @@ jobs:
           kernel_repo: ${{ inputs.kernel_repo }}
           kernel_usage: ${{ inputs.kernel_usage }}
           armbian_fstype: ${{ inputs.armbian_fstype }}
-          armbian_size: '4096'
+          #armbian_size: '4096'
           os_type: desktop
           builder_name: ${{ inputs.builder_name }}
 
