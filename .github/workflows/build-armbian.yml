@@ -332,14 +332,7 @@ jobs:
           echo "build_tag=Armbian_${{ inputs.set_release }}_${{ inputs.armbian_storage }}_$(date +"%Y.%m")" >> ${GITHUB_OUTPUT}
           echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Upload Armbian image to Release
-        uses: ncipollo/release-action@main
-        if: ${{ steps.clean.outputs.status }} == 'success' && !cancelled()
-        with:
-          tag: ${{ steps.clean.outputs.build_tag }}
-          artifacts: build/output/images/*
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+      
 
       - name: Rebuild Armbian
         uses: QXY716/Fine3399-rk3399-armbian@main
